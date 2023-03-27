@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import AnimeList from './components/AnimeList'
+import SearchAnime from './components/SearchAnime'
+import Header from './components/Header'
+import { Box, Container } from '@mui/material'
+import Footer from './components/Footer'
+import { Link, Route, Routes } from 'react-router-dom'
+import UserList from './components/UserList'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   return (
+      <Box sx={{ backgroundColor: 'black' }}>
+         <Container maxWidth='xl'>
+            <Header />
+
+            <Routes>
+               <Route
+                  exact
+                  path='/'
+                  element={<AnimeList />}
+               />
+               <Route
+                  exact
+                  path='/userList'
+                  element={<UserList />}
+               />
+            </Routes>
+            
+            <Footer />
+         </Container>
+      </Box>
+   )
 }
 
-export default App;
+export default App
