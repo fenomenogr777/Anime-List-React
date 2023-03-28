@@ -48,7 +48,7 @@ function UserList() {
    }
 
    return (
-      <Box height='100vh'>
+      <Box>
          <Box
             bgcolor='yellow'
             color='blue'

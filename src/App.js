@@ -8,7 +8,7 @@ import UserList from './components/UserList'
 
 function App() {
    return (
-      <Box sx={{ backgroundColor: 'black' }}>
+      <Box>
          <Container maxWidth='xl'>
             <Header />
 

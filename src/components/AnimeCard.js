@@ -5,6 +5,7 @@ import {
    CardActions,
    CardContent,
    CardMedia,
+   Grid,
    IconButton,
    Typography,
 } from '@mui/material'
@@ -32,62 +33,64 @@ function AnimeCard({ anime }) {
    }
 
    return (
-      <Card
-         key={nanoid()}
-         position='relative'
-         sx={{
-            width: '230px',
-            height: 'auto',
-            backgroundColor: 'primary.light',
-            color: '#fff',
-            margin: '10px',
-         }}
-      >
-         <CardActionArea
-            LinkComponent='a'
-            target='_blank'
-            href={anime?.url}
+      
+         <Card
+            key={nanoid()}
+            position='relative'
+            sx={{
+               width: '230px',
+               height: 'auto',
+               backgroundColor: 'primary.light',
+               color: '#fff',
+               margin: '10px',
+            }}
          >
-            <CardMedia
-               component='img'
-               image={anime?.images.jpg.image_url}
-               alt='animeImage'
-               sx={{ height: '260px', width: '100%' }}
-            />
-         </CardActionArea>
-         <CardContent>
-            <Typography
-               sx={{
-                  width: '267px',
-                  height: '24px',
-                  overflow: 'hidden',
-               }}
+            <CardActionArea
+               LinkComponent='a'
+               target='_blank'
+               href={anime?.url}
             >
-               {anime?.title.toUpperCase()}
-            </Typography>
-            <Typography>EPISODES: {anime?.episodes}</Typography>
-            <Typography>SCORE: {anime?.score || 'N/A'}</Typography>
-         </CardContent>
-
-         <CardActions>
-            {listOfAnimes?.find(val => val?.mal_id === anime?.mal_id) ? (
-               <IconButton
-                  color='error'
-                  onClick={() => handleRemoveAnimeToList(anime)}
+               <CardMedia
+                  component='img'
+                  image={anime?.images.jpg.image_url}
+                  alt='animeImage'
+                  sx={{ height: '260px', width: '100%' }}
+               />
+            </CardActionArea>
+            <CardContent>
+               <Typography
+                  sx={{
+                     width: '267px',
+                     height: '24px',
+                     overflow: 'hidden',
+                  }}
                >
-                  <FavoriteIcon />
-               </IconButton>
-            ) : (
-               <IconButton onClick={() => handleAddAnimeToList(anime)}>
-                  <FavoriteIcon />
-               </IconButton>
-            )}
+                  {anime?.title.toUpperCase()}
+               </Typography>
+               <Typography>EPISODES: {anime?.episodes}</Typography>
+               <Typography>SCORE: {anime?.score || 'N/A'}</Typography>
+            </CardContent>
 
-            <IconButton>
-               <VideoCameraBackIcon />
-            </IconButton>
-         </CardActions>
-      </Card>
+            <CardActions>
+               {listOfAnimes?.find(val => val?.mal_id === anime?.mal_id) ? (
+                  <IconButton
+                     color='error'
+                     onClick={() => handleRemoveAnimeToList(anime)}
+                  >
+                     <FavoriteIcon />
+                  </IconButton>
+               ) : (
+                  <IconButton onClick={() => handleAddAnimeToList(anime)}>
+                     <FavoriteIcon />
+                  </IconButton>
+               )}
+
+               <IconButton>
+                  <VideoCameraBackIcon />
+               </IconButton>
+            </CardActions>
+         </Card>
+   
    )
 }
 export default AnimeCard

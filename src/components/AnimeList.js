@@ -19,15 +19,12 @@ function AnimeList() {
 
    return (
       <Box>
-         <Container maxWidth='xl'>
-            <Grid
-               margin='0'
-               container
-               spacing={4}
-            >
-               {content}
-            </Grid>
-         </Container>
+         <Grid
+            container
+            justifyContent='center'
+         >
+            {content}
+         </Grid>
       </Box>
    )
 }

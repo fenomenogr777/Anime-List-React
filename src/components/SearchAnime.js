@@ -1,7 +1,14 @@
-import { Button, TextField } from '@mui/material'
+import {
+   Button,
+   IconButton,
+   InputAdornment,
+   InputBase,
+   TextField,
+} from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getQuery } from '../store'
+import SearchIcon from '@mui/icons-material/Search'
 
 function SearchAnime() {
    const [animeName, setAnimeName] = useState('')
@@ -29,14 +36,15 @@ function SearchAnime() {
             size='small'
             value={animeName}
             onChange={handleChange}
-            sx={{ backgroundColor: 'white' }}
          />
+
          <Button
+            startIcon={<SearchIcon />}
             variant='contained'
             size='small'
             color='secondary'
          >
-            Search Anime
+            Search
          </Button>
       </form>
    )

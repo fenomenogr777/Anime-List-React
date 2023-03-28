@@ -5,17 +5,18 @@ import {
    TextField,
    Toolbar,
    Typography,
+   useMediaQuery,
 } from '@mui/material'
 import SearchAnime from './SearchAnime'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import { Container } from '@mui/system'
 import { useEffect, useState } from 'react'
 import UserFavouriteList from './UserFavouriteList'
-
-import { Link } from 'react-router-dom'
+import themeMUI from './ThemeMUI'
 
 function Header({ Link }) {
    const [isExpanded, setIsExpanded] = useState(false)
+   const isMatch = useMediaQuery(themeMUI.breakpoints.up('sm'))
 
    useEffect(() => {
       const closeList = e => {
@@ -43,15 +44,17 @@ function Header({ Link }) {
          position='relative'
       >
          <AppBar position='fixed'>
-            <Container maxWidth='xl'>
+            <Container maxWidth='lg'>
                <Toolbar
+                  disableGutters
                   sx={{
                      display: 'flex',
                      justifyContent: 'space-between',
                      alignItems: 'center',
                   }}
                >
-                  <Typography variant='h6'>ANIMIFEY</Typography>
+                  {isMatch && <Typography variant='h6'>ANIMIFEY</Typography>}
+
                   <SearchAnime />
                   <Box position='relative'>
                      {/* <Link to='/test'>TEST</Link> */}
