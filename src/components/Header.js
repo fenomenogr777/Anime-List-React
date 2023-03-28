@@ -1,20 +1,25 @@
 import {
    AppBar,
    Box,
+   Button,
    IconButton,
    TextField,
    Toolbar,
    Typography,
    useMediaQuery,
 } from '@mui/material'
-import SearchAnime from './SearchAnime'
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
+
 import { Container } from '@mui/system'
 import { useEffect, useState } from 'react'
-import UserFavouriteList from './UserFavouriteList'
 import themeMUI from './ThemeMUI'
+import { Link } from 'react-router-dom'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import SearchBar from './SearchBar'
+import { loginUser } from '../store'
+import { useDispatch } from 'react-redux'
 
-function Header({ Link }) {
+function Header() {
+   const dispatch = useDispatch()
    const [isExpanded, setIsExpanded] = useState(false)
    const isMatch = useMediaQuery(themeMUI.breakpoints.up('sm'))
 
@@ -32,7 +37,6 @@ function Header({ Link }) {
    const handleMouseOverUserList = () => {
       setIsExpanded(true)
    }
-   const handleOpenUserList = () => {}
 
    const closeShortcutList = () => {
       setIsExpanded(false)
@@ -43,7 +47,15 @@ function Header({ Link }) {
          sx={{ marginBottom: '40px' }}
          position='relative'
       >
-         <AppBar position='fixed'>
+         <AppBar
+            elevation={0}
+            position='fixed'
+            sx={{
+               backgroundColor: '#4831d4',
+               color: '#fff',
+               // borderBottom: '1px solid #ccf381',
+            }}
+         >
             <Container maxWidth='lg'>
                <Toolbar
                   disableGutters
@@ -53,29 +65,61 @@ function Header({ Link }) {
                      alignItems: 'center',
                   }}
                >
-                  {isMatch && <Typography variant='h6'>ANIMIFEY</Typography>}
-
-                  <SearchAnime />
-                  <Box position='relative'>
-                     {/* <Link to='/test'>TEST</Link> */}
-                     <IconButton
-                        color='secondary'
-                        onMouseOver={handleMouseOverUserList}
-                        onClick={handleOpenUserList}
+                  {/* TITLE */}
+                  {isMatch && (
+                     <Button
+                        component={Link}
+                        to='/'
                      >
-                        <ReceiptLongIcon />
-                     </IconButton>
-
-                     {isExpanded && (
-                        <Box
-                           className='user-list-shortcut'
-                           position='absolute'
-                           left='-750%'
+                        <Typography
+                           variant='h4'
+                           color='primary'
                         >
-                           <UserFavouriteList onClose={closeShortcutList} />
-                        </Box>
-                     )}
+                           ANIMIFEY
+                        </Typography>
+                     </Button>
+                  )}
+
+                  {/* LISTS */}
+                  <Box display='flex'>
+                     {/* <SearchBar /> */}
+                     <Button
+                        component={Link}
+                        to='/'
+                     >
+                        HOME
+                     </Button>
+                     <Button
+                        component={Link}
+                        to='/search'
+                     >
+                        Search
+                     </Button>
+
+                     <Button
+                        component={Link}
+                        to='/list'
+                     >
+                        LIST
+                     </Button>
+                     <Button
+                        component={Link}
+                        to='/contactus'
+                     >
+                        Contact us
+                     </Button>
                   </Box>
+
+                  {/* ICON */}
+
+                  <IconButton
+                     color='primary'
+                     onClick={() => {
+                        dispatch(loginUser(false))
+                     }}
+                  >
+                     <AccountCircleIcon fontSize='large' />
+                  </IconButton>
                </Toolbar>
             </Container>
          </AppBar>

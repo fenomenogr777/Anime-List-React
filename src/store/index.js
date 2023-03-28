@@ -5,8 +5,15 @@ import {
    addAnimeToList,
    removeAnimeToList,
    loadAnimesLocalStorage,
+   deleteAllAnimeList,
 } from './slices/animeSlice'
-import { formReducer, getQuery, getSearchName } from './slices/formSlice'
+import {
+   formReducer,
+   getQuery,
+   getSearchName,
+   getStatus,
+   loginUser,
+} from './slices/formSlice'
 
 // REDUX QUERY
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
@@ -48,4 +55,7 @@ export {
    getQuery,
    getSearchName,
    loadAnimesLocalStorage,
+   deleteAllAnimeList,
+   getStatus,
+   loginUser,
 }

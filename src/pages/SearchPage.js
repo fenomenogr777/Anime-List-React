@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux'
 import { Box, Grid } from '@mui/material'
-import { Container } from '@mui/system'
-import FetchData from './FetchData'
-import { useEffect } from 'react'
-import { useFetchAnimesQuery } from '../store/apis/animesApi'
+import FetchData from '../components/FetchData'
+import SearchBar from '../components/SearchBar'
 
-function AnimeList() {
+function SearchPage({ snackbar }) {
    const store = useSelector(store => store)
    console.log(store)
 
@@ -15,17 +13,21 @@ function AnimeList() {
 
    console.log(listOfAnimes)
 
-   const content = FetchData()
-
    return (
       <Box>
+         <Box
+            display='flex'
+            justifyContent='center'
+         >
+            <SearchBar />
+         </Box>
          <Grid
             container
             justifyContent='center'
          >
-            {content}
+            <FetchData snackbar={snackbar} />
          </Grid>
       </Box>
    )
 }
-export default AnimeList
+export default SearchPage
