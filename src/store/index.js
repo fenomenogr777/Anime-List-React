@@ -6,6 +6,7 @@ import {
    removeAnimeToList,
    loadAnimesLocalStorage,
    deleteAllAnimeList,
+   editAnimeStatus,
 } from './slices/animeSlice'
 import {
    formReducer,
@@ -60,4 +61,5 @@ export {
    deleteAllAnimeList,
    getStatus,
    loginUser,
+   editAnimeStatus,
 }

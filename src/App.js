@@ -9,7 +9,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import SearchPage from './pages/SearchPage'
 import ListPage from './pages/ListPage'
-import ContactUs from './pages/ContactUs'
+import Subscribe from './pages/Subscribe'
 import { useSelector } from 'react-redux'
 import { Stack } from '@mui/system'
 
@@ -30,7 +30,7 @@ function App() {
             <Box
                display='flex'
                flexDirection='column'
-               justifyContent="space-between"
+               justifyContent='space-between'
                // height='100vh'
             >
                {/* IF LOGIN SHOW HEADER  */}
@@ -66,13 +66,13 @@ function App() {
                      />
                      <Route
                         exact
-                        path='/contactus'
-                        element={<ContactUs />}
+                        path='/subscribe'
+                        element={<Subscribe />}
                      />
                   </Routes>
                )}
 
-               <Footer />
+               {/* <Footer /> */}
             </Box>
          </Container>
       </Box>

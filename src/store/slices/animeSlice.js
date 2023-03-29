@@ -25,6 +25,18 @@ const animeSlice = createSlice({
             state.listOfAnimes = action.payload
          }
       },
+      editAnimeStatus(state, action) {
+         console.log(action.payload)
+         state.listOfAnimes = state.listOfAnimes.map(anime => {
+            if (anime.mal_id === action.payload.id) {
+               return {
+                  ...anime,
+                  userStatus: action.payload.status,
+               }
+            }
+            return anime
+         })
+      },
    },
 })
 
@@ -33,5 +45,6 @@ export const {
    removeAnimeToList,
    loadAnimesLocalStorage,
    deleteAllAnimeList,
+   editAnimeStatus,
 } = animeSlice.actions
 export const animeReducer = animeSlice.reducer

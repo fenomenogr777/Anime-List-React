@@ -43,6 +43,14 @@ const animesApi = createApi({
                }
             },
          }),
+         fetchTopCharacters: builder.query({
+            query: () => {
+               return {
+                  url: 'v4/top/characters',
+                  method: 'GET',
+               }
+            },
+         }),
       }
    },
 })
@@ -52,5 +60,6 @@ export const {
    useFetchTopAnimesQuery,
    useFetchRecentEpisodesQuery,
    useFetchReviewsAnimesQuery,
+   useFetchTopCharactersQuery,
 } = animesApi
 export { animesApi }

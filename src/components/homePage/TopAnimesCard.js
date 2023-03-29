@@ -2,7 +2,6 @@ import {
    Box,
    Card,
    CardActionArea,
-   CardActions,
    CardContent,
    CardMedia,
    Typography,
@@ -12,7 +11,7 @@ import { nanoid } from '@reduxjs/toolkit'
 function TopAnimesCard({ topAnimes }) {
    console.log(topAnimes?.data)
    const renderedTopAnimes = topAnimes?.data?.map((anime, index) => {
-      if (index > 5) return ''
+      if (index > 4) return ''
       return (
          <Card
             key={nanoid()}
@@ -32,7 +31,7 @@ function TopAnimesCard({ topAnimes }) {
                <CardMedia
                   component='img'
                   image={anime?.images.jpg.image_url}
-                  sx={{ width: '70px', height: 'auto' }}
+                  sx={{ width: '70px', height: '98px' }}
                />
                <CardContent>
                   <Typography>{anime.title.slice(0, 40)}</Typography>

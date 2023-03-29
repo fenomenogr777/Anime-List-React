@@ -15,10 +15,12 @@ import { useEffect, useState } from 'react'
 import { addAnimeToList, removeAnimeToList } from '../store/slices/animeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+import DropDown from './DropDown'
 
 function AnimeCard({ anime, snackbar }) {
    const dispatch = useDispatch()
    const [isExpanded, setIsExpanded] = useState(false)
+   const [animeObj, setAnimeObj] = useState('')
 
    const { listOfAnimes } = useSelector(
       ({ persistedReducer: { storeAnimes } }) => storeAnimes
@@ -37,17 +39,19 @@ function AnimeCard({ anime, snackbar }) {
    }, [])
 
    // HANDLES
-   const handleAddAnimeToList = (anime, status) => {
-      dispatch(addAnimeToList({ ...anime, userStatus: status }))
-     
+   const handleAddAnimeToList = status => {
+      dispatch(addAnimeToList({ ...animeObj, userStatus: status }))
       setIsExpanded(false)
+      setAnimeObj('')
    }
+
    const handleRemoveAnimeToList = anime => {
       dispatch(removeAnimeToList(anime.mal_id))
    }
 
-   const handleAddAnimeDropdown = () => {
+   const handleOpenDropdown = () => {
       setIsExpanded(!isExpanded)
+      setAnimeObj(anime)
    }
 
    return (
@@ -86,30 +90,20 @@ function AnimeCard({ anime, snackbar }) {
             >
                {anime?.title.toUpperCase()}
             </Typography>
-            <Typography color='#160f40'>EPISODES: {anime?.episodes}</Typography>
+            <Typography color='#160f40'>
+               EPISODES: {anime.episodes || 0}
+            </Typography>
             <Typography color='#160f40'>
                SCORE: {anime?.score || 'N/A'}
             </Typography>
          </CardContent>
 
          <CardActions>
-            {/* {listOfAnimes?.find(val => val?.mal_id === anime?.mal_id) ? (
-               <IconButton
-                  color='error'
-                  onClick={() => handleRemoveAnimeToList(anime)}
-               >
-                  <FavoriteIcon />
-               </IconButton>
-            ) : (
-               <IconButton onClick={() => handleAddAnimeToList(anime)}>
-                  <FavoriteIcon />
-               </IconButton>
-            )} */}
-
             {listOfAnimes.find(value => value.mal_id === anime.mal_id) ? (
                <Button
                   variant='contained'
                   color='error'
+                  onClick={() => handleRemoveAnimeToList(anime)}
                >
                   Remove from List
                </Button>
@@ -117,7 +111,7 @@ function AnimeCard({ anime, snackbar }) {
                <IconButton
                   className='dropdown-status'
                   color='success'
-                  onClick={handleAddAnimeDropdown}
+                  onClick={handleOpenDropdown}
                >
                   Add <AddCircleIcon />
                </IconButton>
@@ -128,30 +122,12 @@ function AnimeCard({ anime, snackbar }) {
                   <Box
                      position='absolute'
                      left={0}
-                     top='-100px'
+                     top='-120px'
                      zIndex={999}
                      padding='5px'
                      bgcolor='red'
                   >
-                     <Button
-                        size='small'
-                        color='success'
-                        onClick={() => handleAddAnimeToList(anime, 'watching')}
-                     >
-                        Watching
-                     </Button>
-                     <Button
-                        size='small'
-                        onClick={() => handleAddAnimeToList(anime, 'dropped')}
-                     >
-                        Dropped
-                     </Button>
-                     <Button
-                        size='small'
-                        onClick={() => handleAddAnimeToList(anime, 'onhold')}
-                     >
-                        OnHold
-                     </Button>
+                     <DropDown onEdit={handleAddAnimeToList} />
                   </Box>
                )}
             </Box>

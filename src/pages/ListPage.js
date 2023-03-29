@@ -12,18 +12,36 @@ import {
 import { nanoid } from '@reduxjs/toolkit'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { deleteAllAnimeList, getSearchName, getStatus } from '../store'
-import HomeIcon from '@mui/icons-material/Home'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { removeAnimeToList } from '../store'
+import currentDate from '../components/currentDate'
+import StarIcon from '@mui/icons-material/Star'
+import DropDown from '../components/DropDown'
+import { editAnimeStatus } from '../store'
 
 function ListPage() {
+   console.log(currentDate())
    const dispatch = useDispatch()
    const [value, setValue] = useState('')
+   const [openDropdown, setOpenDropdown] = useState(false)
 
    const handleRemoveAnime = id => {
       dispatch(removeAnimeToList(id))
+   }
+
+   const handleEditUserStatus = editedStatus => {
+      console.log(editedStatus)
+      console.log(openDropdown)
+      dispatch(editAnimeStatus({ status: editedStatus, id: openDropdown }))
+      setOpenDropdown(false)
+   }
+
+   const handleOpenDropDown = id => {
+      setOpenDropdown(id)
+      if (id === openDropdown) {
+         setOpenDropdown('')
+      }
    }
 
    const listOfAnimes = useSelector(
@@ -42,6 +60,8 @@ function ListPage() {
          )
       }
    )
+
+   console.log(listOfAnimes)
 
    const renderedAnimes = listOfAnimes?.map((anime, index) => {
       return (
@@ -70,7 +90,59 @@ function ListPage() {
                />
                <CardContent>
                   <Typography color='white'> {anime.title}</Typography>
-                  <Button> {anime.userStatus}</Button>
+
+                  <Box
+                     display='flex'
+                     gap={1}
+                  >
+                     <Box
+                        display='flex'
+                        gap={0.4}
+                     >
+                        <StarIcon color='primary' />
+                        <Typography
+                           color='white'
+                           variant='subtitle1'
+                        >
+                           {anime.score}
+                        </Typography>
+                     </Box>
+                     <Box
+                        display='flex'
+                        gap={0.4}
+                        alignItems='center'
+                     >
+                        <Typography
+                           color='primary'
+                           variant='subtitle1'
+                           fontWeight={600}
+                        >
+                           EPS
+                        </Typography>
+                        <Typography
+                           color='white'
+                           variant='subtitle1'
+                        >
+                           {anime.episodes || "N/A"}
+                        </Typography>
+                     </Box>
+                  </Box>
+
+                  <Button
+                     position='relative'
+                     id={anime.mal_id}
+                     onClick={() => handleOpenDropDown(anime.mal_id)}
+                  >
+                     {anime.userStatus}
+                  </Button>
+                  {openDropdown === anime.mal_id && (
+                     <Box
+                        position='absolute'
+                        backgroundColor='white'
+                     >
+                        <DropDown onEdit={handleEditUserStatus} />
+                     </Box>
+                  )}
                </CardContent>
                <IconButton
                   color='error'
@@ -93,14 +165,6 @@ function ListPage() {
    // JSX
    return (
       <Box>
-         <Button
-            startIcon={<HomeIcon />}
-            component={Link}
-            to='/'
-            variant='contained'
-         >
-            Main Page
-         </Button>
          <Box
             color='black'
             display='flex'

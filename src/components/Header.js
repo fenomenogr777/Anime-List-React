@@ -103,10 +103,11 @@ function Header() {
                         LIST
                      </Button>
                      <Button
+                     variant='contained'
                         component={Link}
-                        to='/contactus'
+                        to='/subscribe'
                      >
-                        Contact us
+                        Subscribe
                      </Button>
                   </Box>
 

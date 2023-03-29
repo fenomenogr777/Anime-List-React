@@ -12,7 +12,7 @@ import { nanoid } from '@reduxjs/toolkit'
 function RecentEpisodes({ recentEpisodes }) {
    console.log(recentEpisodes)
    const renderedRecentEpisodes = recentEpisodes?.data?.map((anime, index) => {
-      if (index > 5) return ''
+      if (index > 4) return ''
       return (
          <Card
             key={nanoid()}
@@ -32,10 +32,10 @@ function RecentEpisodes({ recentEpisodes }) {
                <CardMedia
                   component='img'
                   image={anime?.entry.images.jpg.image_url}
-                  sx={{ width: '70px', height: 'auto' }}
+                  sx={{ width: '70px', height: '98px' }}
                />
                <CardContent>
-                  <Typography>{anime.entry.title}</Typography>
+                  <Typography>{anime.entry.title.slice(0, 40)}</Typography>
                </CardContent>
             </CardActionArea>
          </Card>

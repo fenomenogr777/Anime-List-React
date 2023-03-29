@@ -12,11 +12,11 @@ function LatestReviews({ reviewsAnimes }) {
    console.log(reviewsAnimes)
 
    const renderedReviews = reviewsAnimes?.data?.map((review, index) => {
-      if (index > 3) return ''
+      if (index > 4) return ''
       return (
          <Card
             key={nanoid()}
-            sx={{ mb: '5px' }}
+            sx={{ mb: '5px', maxWidth: '300px', backgroundColor: '#9183e5' }}
          >
             <CardHeader
                title={review.user.username}
@@ -30,13 +30,20 @@ function LatestReviews({ reviewsAnimes }) {
                   justifyContent: 'space-between',
                }}
             >
-               <Typography>{review?.review.slice(0, 40)}</Typography>
+               <Typography>''{review?.review.slice(0, 50)}''</Typography>
             </CardContent>
             <Typography fontWeight={600}>{review?.entry.title}</Typography>
          </Card>
       )
    })
 
-   return <Box>{renderedReviews}</Box>
+   return (
+      <Box
+         display='flex'
+         gap={1}
+      >
+         {renderedReviews}
+      </Box>
+   )
 }
 export default LatestReviews
