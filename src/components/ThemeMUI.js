@@ -3,7 +3,7 @@ const themeMUI = createTheme({
    palette: {
       primary: {
          main: '#ccf381',
-         
+         light: '#9183e5',
       },
       secondary: {
          main: '#5a46d8',

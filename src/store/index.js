@@ -17,12 +17,14 @@ import {
 
 // REDUX QUERY
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
-import { animesApi } from './apis/animesApi'
 
 // REDUX PERSISTENT
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 import { combineReducers } from '@reduxjs/toolkit'
+
+//  animes
+import { animesApi } from './apis/animesApi'
 
 const persistConfig = {
    key: 'anime',

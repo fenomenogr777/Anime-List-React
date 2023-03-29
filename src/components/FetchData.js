@@ -1,4 +1,4 @@
-import {  CircularProgress, Snackbar } from '@mui/material'
+import { CircularProgress, Snackbar } from '@mui/material'
 import { nanoid } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import { useFetchAnimesQuery } from '../store/apis/animesApi'
@@ -8,7 +8,7 @@ function FetchData({ snackbar }) {
    const { query } = useSelector(({ storeForm }) => storeForm)
 
    const { data, error, isLoading } = useFetchAnimesQuery(query)
-
+   console.log(data)
    let content
 
    if (isLoading) {
@@ -26,7 +26,7 @@ function FetchData({ snackbar }) {
          )
       })
    }
-
+   console.log(content)
    return content
 }
 export default FetchData

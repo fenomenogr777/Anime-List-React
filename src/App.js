@@ -11,6 +11,7 @@ import SearchPage from './pages/SearchPage'
 import ListPage from './pages/ListPage'
 import ContactUs from './pages/ContactUs'
 import { useSelector } from 'react-redux'
+import { Stack } from '@mui/system'
 
 function App() {
    const { logged } = useSelector(({ storeForm }) => storeForm)
@@ -23,42 +24,56 @@ function App() {
 
    const [openSnackbar, setOpenSnackbar] = useState(false)
 
-
-
    return (
       <Box>
          <Container maxWidth='xl'>
-            {/* IF LOGIN SHOW HEADER  */}
-            {!isLogged && <LoginPage />}
-            {isLogged && <Header />}
+            <Box
+               display='flex'
+               flexDirection='column'
+               justifyContent="space-between"
+               // height='100vh'
+            >
+               {/* IF LOGIN SHOW HEADER  */}
+               {!isLogged && (
+                  <Box
+                     display='flex'
+                     justifyContent='center'
+                     mt={10}
+                  >
+                     <LoginPage />
+                  </Box>
+               )}
 
-            {/* ROUTES */}
-            {isLogged && (
-               <Routes>
-                  <Route
-                     exact
-                     path='/'
-                     element={<HomePage />}
-                  />
-                  <Route
-                     exact
-                     path='/search'
-                     element={<SearchPage />}
-                  />
-                  <Route
-                     exact
-                     path='/list'
-                     element={<ListPage />}
-                  />
-                  <Route
-                     exact
-                     path='/contactus'
-                     element={<ContactUs />}
-                  />
-               </Routes>
-            )}
-            <Footer />
-           
+               {isLogged && <Header />}
+
+               {/* ROUTES */}
+               {isLogged && (
+                  <Routes>
+                     <Route
+                        exact
+                        path='/'
+                        element={<HomePage />}
+                     />
+                     <Route
+                        exact
+                        path='/search'
+                        element={<SearchPage />}
+                     />
+                     <Route
+                        exact
+                        path='/list'
+                        element={<ListPage />}
+                     />
+                     <Route
+                        exact
+                        path='/contactus'
+                        element={<ContactUs />}
+                     />
+                  </Routes>
+               )}
+
+               <Footer />
+            </Box>
          </Container>
       </Box>
    )
