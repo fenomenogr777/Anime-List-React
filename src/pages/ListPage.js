@@ -30,11 +30,17 @@ function ListPage() {
          <Box
             color='black'
             display='flex'
+            alignItems='center'
             flexDirection='column'
             gap={2}
          >
             <FilterAnimes listOfAnimes={listOfAnimes} />
-            <Grid container>
+            <Grid
+               container
+               display='flex'
+               alignItems='center'
+               justifyContent='center'
+            >
                <RenderedAnimes listOfAnimes={listOfAnimes} />
             </Grid>
          </Box>

@@ -1,7 +1,7 @@
 import { Button, InputAdornment, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getQuery } from '../store'
+import { getQuery } from '../../store'
 import SearchIcon from '@mui/icons-material/Search'
 
 function SearchBar() {

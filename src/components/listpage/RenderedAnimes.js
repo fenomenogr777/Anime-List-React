@@ -6,6 +6,7 @@ import {
    CardMedia,
    Grid,
    IconButton,
+   styled,
    Typography,
 } from '@mui/material'
 import { nanoid } from '@reduxjs/toolkit'
@@ -43,11 +44,12 @@ function RenderedAnimes({ listOfAnimes }) {
       return (
          <Grid
             item
-            xs={6}
             key={nanoid()}
          >
             <Card
                sx={{
+                  width: '280px',
+                  height: '120px',
                   backgroundColor: '#9183e5',
                   margin: '10px',
                   display: 'flex',
@@ -64,53 +66,74 @@ function RenderedAnimes({ listOfAnimes }) {
                      padding: '10px',
                   }}
                />
-               <CardContent>
-                  <Typography color='white'> {anime.title}</Typography>
+               <CardContent
+                  sx={{
+                     padding: '10px 0px 0px 0px ',
+                     display: 'flex',
+                     flexDirection: 'column',
+                     alignItems: 'flex-start',
+                     justifyContent: 'space-between',
+                     '&:last-child': { pb: 0 },
+                  }}
+               >
+                  <Typography color='white'>
+                     {' '}
+                     {anime.title.slice(0, 35)}
+                  </Typography>
 
                   <Box
                      display='flex'
-                     gap={1}
+                     alignItems='flex-start'
+                     flexDirection='column'
                   >
                      <Box
                         display='flex'
-                        gap={0.4}
+                        gap={1}
                      >
-                        <StarIcon color='primary' />
-                        <Typography
-                           color='white'
-                           variant='subtitle1'
+                        {/* score */}
+                        <Box
+                           display='flex'
+                           gap={0.4}
                         >
-                           {anime.score}
-                        </Typography>
+                           <StarIcon color='primary' />
+                           <Typography
+                              color='white'
+                              variant='subtitle1'
+                           >
+                              {anime.score}
+                           </Typography>
+                        </Box>
+                        {/* episodes */}
+                        <Box
+                           display='flex'
+                           gap={0.4}
+                           alignItems='center'
+                        >
+                           <Typography
+                              color='primary'
+                              variant='subtitle1'
+                              fontWeight={600}
+                           >
+                              EPS
+                           </Typography>
+                           <Typography
+                              color='white'
+                              variant='subtitle1'
+                           >
+                              {anime.episodes || 'N/A'}
+                           </Typography>
+                        </Box>
                      </Box>
-                     <Box
-                        display='flex'
-                        gap={0.4}
-                        alignItems='center'
+                     {/* status */}
+                     <Button
+                        position='relative'
+                        id={anime.mal_id}
+                        onClick={() => handleOpenDropDown(anime.mal_id)}
                      >
-                        <Typography
-                           color='primary'
-                           variant='subtitle1'
-                           fontWeight={600}
-                        >
-                           EPS
-                        </Typography>
-                        <Typography
-                           color='white'
-                           variant='subtitle1'
-                        >
-                           {anime.episodes || 'N/A'}
-                        </Typography>
-                     </Box>
+                        {anime.userStatus}
+                     </Button>
                   </Box>
 
-                  <Button
-                     position='relative'
-                     id={anime.mal_id}
-                     onClick={() => handleOpenDropDown(anime.mal_id)}
-                  >
-                     {anime.userStatus}
-                  </Button>
                   {openDropdown === anime.mal_id && (
                      <Box
                         position='absolute'
@@ -120,12 +143,12 @@ function RenderedAnimes({ listOfAnimes }) {
                      </Box>
                   )}
                </CardContent>
-               <IconButton
+               {/* <IconButton
                   color='error'
                   onClick={() => handleRemoveAnime(anime?.mal_id)}
                >
                   <CancelIcon />
-               </IconButton>
+               </IconButton> */}
             </Card>
          </Grid>
       )

@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Box, Grid } from '@mui/material'
-import FetchData from '../components/FetchData'
-import SearchBar from '../components/SearchBar'
-
+import FetchData from '../components/searchpage/FetchData'
+import SearchBar from '../components/searchpage/SearchBar'
 function SearchPage({ snackbar }) {
    const store = useSelector(store => store)
    console.log(store)

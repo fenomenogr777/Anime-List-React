@@ -50,6 +50,7 @@ function FilterAnimes({ listOfAnimes }) {
             <Box>
                <Button
                   size='small'
+                  sx={{ justifyContent: 'right' }}
                   onClick={() => dispatch(getStatus(''))}
                >
                   All

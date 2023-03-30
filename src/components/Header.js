@@ -3,7 +3,6 @@ import {
    Box,
    Button,
    IconButton,
-   TextField,
    Toolbar,
    Typography,
    useMediaQuery,
@@ -14,7 +13,6 @@ import { useEffect, useState } from 'react'
 import themeMUI from './ThemeMUI'
 import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import SearchBar from './SearchBar'
 import { loginUser } from '../store'
 import { useDispatch } from 'react-redux'
 
