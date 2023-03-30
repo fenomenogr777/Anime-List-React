@@ -108,24 +108,26 @@ function AnimeCard({ anime, snackbar }) {
                   Remove from List
                </Button>
             ) : (
-               <IconButton
+               <Button
+                  endIcon={<AddCircleIcon />}
+                  variant='contained'
                   className='dropdown-status'
                   color='success'
                   onClick={handleOpenDropdown}
                >
-                  Add <AddCircleIcon />
-               </IconButton>
+                  Add to list
+               </Button>
             )}
 
             <Box position='relative'>
                {isExpanded && (
                   <Box
                      position='absolute'
-                     left={0}
-                     top='-120px'
-                     zIndex={999}
+                     left='-8px'
+                     top='-110px'
                      padding='5px'
-                     bgcolor='red'
+                     bgcolor='black'
+                     borderRadius={2}
                   >
                      <DropDown onEdit={handleAddAnimeToList} />
                   </Box>

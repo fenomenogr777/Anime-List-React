@@ -1,9 +1,8 @@
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material'
+import { Button, InputAdornment, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getQuery } from '../store'
 import SearchIcon from '@mui/icons-material/Search'
-import { Link } from 'react-router-dom'
 
 function SearchBar() {
    const [animeName, setAnimeName] = useState('')
@@ -49,7 +48,7 @@ function SearchBar() {
             }}
          />
 
-         {false&&<Button type='submit'></Button>}
+         {false && <Button type='submit'></Button>}
       </form>
    )
 }

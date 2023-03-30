@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
-import { nanoid } from '@reduxjs/toolkit'
-import TopAnimesCard from '../components/homePage/TopAnimesCard'
-import LatestReviews from '../components/homePage/LatestReviews'
-import RecentEpisodes from '../components/homePage/RecentEpisodes'
-import FavouriteCharacters from '../components/homePage/FavouriteCharacters'
+
+import TopAnimesCard from '../components/homepage/TopAnimesCard'
+import LatestReviews from '../components/homepage/LatestReviews'
+import RecentEpisodes from '../components/homepage/RecentEpisodes'
+import FavouriteCharacters from '../components/homepage/FavouriteCharacters'
 
 import { useFetchTopAnimesQuery } from '../store/apis/animesApi'
 import { useFetchRecentEpisodesQuery } from '../store/apis/animesApi'
@@ -15,7 +15,6 @@ function HomePage() {
    const { data: reviewsAnimes } = useFetchReviewsAnimesQuery()
    const { data: recentEpisodes } = useFetchRecentEpisodesQuery()
    const { data: favouriteCharacters } = useFetchTopCharactersQuery()
-   console.log(favouriteCharacters)
 
    return (
       <Box>
@@ -35,6 +34,7 @@ function HomePage() {
                </Typography>
                <TopAnimesCard topAnimes={topAnimes} />
             </Box>
+
             {/* MOST FAVOURITE CHARACTERS*/}
             <Box>
                <Typography
@@ -46,6 +46,7 @@ function HomePage() {
                </Typography>
                <FavouriteCharacters favouriteCharacters={favouriteCharacters} />
             </Box>
+
             {/* recent episodes */}
             <Box>
                <Typography
@@ -70,27 +71,6 @@ function HomePage() {
             </Typography>
             <LatestReviews reviewsAnimes={reviewsAnimes} />
          </Box>
-
-         {/* Q&A */}
-         {/* <Box textAlign='center'>
-            <Typography
-               variant='h6'
-               color='white'
-            >
-               1) What's Animifey?
-            </Typography>
-            <Typography variant='p'>
-               Animifey is a website you can searsch your favourite animes and
-               organize them on lists based on many criterias
-            </Typography>
-            <Typography
-               variant='h6'
-               color='white'
-            >
-               2) Is Animifey free?
-            </Typography>
-            <Typography variant='p'>Yes,its completely free for use</Typography>
-         </Box> */}
       </Box>
    )
 }

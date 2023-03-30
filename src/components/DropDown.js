@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, Divider } from '@mui/material'
 
 function DropDown({ onEdit }) {
    const handleClick = val => {
@@ -7,10 +7,38 @@ function DropDown({ onEdit }) {
 
    return (
       <Box>
-         <Button onClick={() => handleClick('watching')}>Watching</Button>
-         <Button onClick={() => handleClick('finished')}>Finished</Button>
-         <Button onClick={() => handleClick('onhold')}>OnHold</Button>
-         <Button onClick={() => handleClick('dropped')}>Dropped</Button>
+         <Button
+            onClick={() => handleClick('watching')}
+            color='primary'
+            variant='text'
+            size='small'
+         >
+            Watching
+         </Button>
+         <Divider />
+         <Button
+            color='success'
+            size='small'
+            onClick={() => handleClick('finished')}
+         >
+            Finished
+         </Button>
+         <Divider />
+         <Button
+            color='warning'
+            size='small'
+            onClick={() => handleClick('onhold')}
+         >
+            OnHold
+         </Button>
+         <Divider />
+         <Button
+            size='small'
+            color='error'
+            onClick={() => handleClick('dropped')}
+         >
+            Dropped
+         </Button>
       </Box>
    )
 }

@@ -13,6 +13,7 @@ function TopAnimesCard({ topAnimes }) {
    const renderedTopAnimes = topAnimes?.data?.map((anime, index) => {
       if (index > 4) return ''
       return (
+         
          <Card
             key={nanoid()}
             sx={{
