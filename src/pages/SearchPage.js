@@ -1,16 +1,15 @@
 import { useSelector } from 'react-redux'
 import { Box, Grid } from '@mui/material'
-import FetchData from '../components/searchpage/FetchData'
 import SearchBar from '../components/searchpage/SearchBar'
-function SearchPage({ snackbar }) {
-   const store = useSelector(store => store)
-   console.log(store)
+import { useFetchAnimesQuery } from '../store/apis/animesApi'
+import FetchData from '../components/searchpage/FetchData'
 
-   const { listOfAnimes } = useSelector(
-      ({ persistedReducer: { storeAnimes } }) => storeAnimes
-   )
+function SearchPage() {
+   // GETS QUERY WHICH RECEIVED FROM SEARCHBAR EX. "NARUTO"
+   const { query } = useSelector(({ storeForm }) => storeForm)
 
-   console.log(listOfAnimes)
+   // GET DATA BASED ON QUERY
+   const { data, error, isLoading } = useFetchAnimesQuery(query)
 
    return (
       <Box>
@@ -18,13 +17,19 @@ function SearchPage({ snackbar }) {
             display='flex'
             justifyContent='center'
          >
+            {/* searchbar  */}
             <SearchBar />
          </Box>
          <Grid
             container
             justifyContent='center'
          >
-            <FetchData snackbar={snackbar} />
+            {/* RETURNS FINAL DATA */}
+            <FetchData
+               data={data}
+               error={error}
+               isLoading={isLoading}
+            />
          </Grid>
       </Box>
    )

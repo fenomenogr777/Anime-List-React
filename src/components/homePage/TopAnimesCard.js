@@ -13,7 +13,6 @@ function TopAnimesCard({ topAnimes }) {
    const renderedTopAnimes = topAnimes?.data?.map((anime, index) => {
       if (index > 4) return ''
       return (
-         
          <Card
             key={nanoid()}
             sx={{
@@ -23,6 +22,9 @@ function TopAnimesCard({ topAnimes }) {
             }}
          >
             <CardActionArea
+               LinkComponent='a'
+               target='_blank'
+               href={anime?.url}
                sx={{
                   display: 'flex',
                   alignItems: 'flex-start',

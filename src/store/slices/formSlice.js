@@ -7,8 +7,12 @@ const formSlice = createSlice({
       logged: false,
       search: {
          name: '',
-         type: '',
+         score: '',
+         sorted: false,
          status: '',
+      },
+      searchPageFilter: {
+         score: '',
       },
    },
    reducers: {
@@ -16,7 +20,7 @@ const formSlice = createSlice({
          state.query = action.payload
       },
       getSearchName(state, action) {
-         state.search.name = action.payload
+         state.search = action.payload
       },
       getStatus(state, action) {
          state.search.status = action.payload
@@ -24,9 +28,18 @@ const formSlice = createSlice({
       loginUser(state, action) {
          state.logged = action.payload
       },
+      searchPageFilter(state, action) {
+         console.log(action.payload)
+         state.searchPageFilter.score = action.payload
+      },
    },
 })
 
-export const { getQuery, getSearchName, getStatus, loginUser } =
-   formSlice.actions
+export const {
+   getQuery,
+   getSearchName,
+   getStatus,
+   loginUser,
+   searchPageFilter,
+} = formSlice.actions
 export const formReducer = formSlice.reducer

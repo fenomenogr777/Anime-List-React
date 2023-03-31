@@ -11,10 +11,28 @@ import { useFetchReviewsAnimesQuery } from '../store/apis/animesApi'
 import { useFetchTopCharactersQuery } from '../store/apis/animesApi'
 
 function HomePage() {
-   const { data: topAnimes } = useFetchTopAnimesQuery()
-   const { data: reviewsAnimes } = useFetchReviewsAnimesQuery()
-   const { data: recentEpisodes } = useFetchRecentEpisodesQuery()
-   const { data: favouriteCharacters } = useFetchTopCharactersQuery()
+   const {
+      data: topAnimes,
+      error: topAnimesError,
+      isLoading: topAnimesIsLoading,
+   } = useFetchTopAnimesQuery()
+   const {
+      data: reviewsAnimes,
+      error: reviewsAnimesError,
+      isLoading: reviewsAnimesIsLoading,
+   } = useFetchReviewsAnimesQuery()
+   const {
+      data: recentEpisodes,
+      error: recentEpisodesError,
+      isLoading: recentEpisodesIsLoading,
+   } = useFetchRecentEpisodesQuery()
+   const {
+      data: favouriteCharacters,
+      error: favouriteCharactersError,
+      isLoading: favouriteCharactersIsLoading,
+   } = useFetchTopCharactersQuery()
+
+   console.log(recentEpisodes)
 
    return (
       <Box>
@@ -44,7 +62,11 @@ function HomePage() {
                >
                   TOP CHARACTERS
                </Typography>
-               <FavouriteCharacters favouriteCharacters={favouriteCharacters} />
+               <FavouriteCharacters
+                  favouriteCharacters={favouriteCharacters}
+                  favouriteCharactersError={favouriteCharactersError}
+                  favouriteCharactersIsLoading={favouriteCharactersIsLoading}
+               />
             </Box>
 
             {/* recent episodes */}

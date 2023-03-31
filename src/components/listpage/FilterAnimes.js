@@ -1,19 +1,35 @@
-import { Button, InputAdornment, TextField, Typography } from '@mui/material'
+import {
+   Button,
+   FormControl,
+   InputAdornment,
+   InputLabel,
+   MenuItem,
+   Select,
+   TextField,
+   Typography,
+} from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
 import { deleteAllAnimeList, getSearchName, getStatus } from '../../store'
 import SearchIcon from '@mui/icons-material/Search'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function FilterAnimes({ listOfAnimes }) {
    const dispatch = useDispatch()
-   const [value, setValue] = useState('')
+
+   const [value, setValue] = useState({
+      name: '',
+      score: '',
+      status: '',
+   })
+
    const handleChange = e => {
-      console.log(e)
-      const { value } = e.target
-      setValue(value)
-      dispatch(getSearchName(value.toLowerCase()))
+      setValue({ ...value, [e.target.name]: e.target.value })
    }
+
+   useEffect(() => {
+      dispatch(getSearchName(value))
+   }, [value, dispatch])
 
    return (
       <>
@@ -26,6 +42,7 @@ function FilterAnimes({ listOfAnimes }) {
 
          <Box display='flex'>
             <TextField
+               name='name'
                sx={{
                   padding: '0',
                   backgroundColor: '#3a27aa',
@@ -33,7 +50,7 @@ function FilterAnimes({ listOfAnimes }) {
                }}
                placeholder='Search...'
                size='small'
-               value={value}
+               value={value.name}
                onChange={handleChange}
                variant='outlined'
                InputProps={{
@@ -44,6 +61,37 @@ function FilterAnimes({ listOfAnimes }) {
                   ),
                }}
             />
+         </Box>
+
+         <Box display='flex'>
+            <FormControl
+               sx={{ minWidth: '90px' }}
+               size='small'
+            >
+               <InputLabel>Score</InputLabel>
+               <Select
+                  value={value.score}
+                  label='Score'
+                  onChange={handleChange}
+                  name='score'
+               >
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={7}>7</MenuItem>
+                  <MenuItem value={8}>8</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+               </Select>
+            </FormControl>
+            <Button
+               variant='contained'
+               onClick={() => setValue({ name: '', score: '', status: '' })}
+            >
+               clear
+            </Button>
          </Box>
          <Box>
             <Typography>LIST ({listOfAnimes.length} Items)</Typography>

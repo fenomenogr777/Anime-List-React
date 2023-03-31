@@ -23,6 +23,9 @@ function RecentEpisodes({ recentEpisodes }) {
             }}
          >
             <CardActionArea
+               LinkComponent='a'
+               href={anime.entry.url}
+               target='e_blank'
                sx={{
                   display: 'flex',
                   alignItems: 'flex-start',

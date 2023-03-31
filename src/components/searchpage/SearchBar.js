@@ -5,21 +5,22 @@ import { getQuery } from '../../store'
 import SearchIcon from '@mui/icons-material/Search'
 
 function SearchBar() {
-   const [animeName, setAnimeName] = useState('')
-
    const dispatch = useDispatch()
 
+   const [animeName, setAnimeName] = useState('')
+
+   // HANDLES
    const handleChange = e => {
       const { value } = e.target
       setAnimeName(value)
    }
-
    const handleSubmit = e => {
       e.preventDefault()
       dispatch(getQuery(animeName))
       setAnimeName('')
    }
 
+   // JSX
    return (
       <form
          onSubmit={handleSubmit}
@@ -47,8 +48,6 @@ function SearchBar() {
                ),
             }}
          />
-
-         {false && <Button type='submit'></Button>}
       </form>
    )
 }

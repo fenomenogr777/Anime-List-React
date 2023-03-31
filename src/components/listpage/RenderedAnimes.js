@@ -5,13 +5,10 @@ import {
    CardContent,
    CardMedia,
    Grid,
-   IconButton,
-   styled,
    Typography,
 } from '@mui/material'
 import { nanoid } from '@reduxjs/toolkit'
 import DropDown from '../DropDown'
-import CancelIcon from '@mui/icons-material/Cancel'
 import StarIcon from '@mui/icons-material/Star'
 import { editAnimeStatus, removeAnimeToList } from '../../store'
 import { useDispatch } from 'react-redux'
@@ -20,6 +17,7 @@ import { useState } from 'react'
 function RenderedAnimes({ listOfAnimes }) {
    const dispatch = useDispatch()
 
+   // HANDLES DROPDOWN OPEN CLOSE
    const [openDropdown, setOpenDropdown] = useState(false)
 
    const handleRemoveAnime = id => {
@@ -33,6 +31,7 @@ function RenderedAnimes({ listOfAnimes }) {
       setOpenDropdown(false)
    }
 
+   // IF ID SAME OPENS DROPDOWN IF CLICK SAME IT CLOSES
    const handleOpenDropDown = id => {
       setOpenDropdown(id)
       if (id === openDropdown) {
@@ -143,12 +142,6 @@ function RenderedAnimes({ listOfAnimes }) {
                      </Box>
                   )}
                </CardContent>
-               {/* <IconButton
-                  color='error'
-                  onClick={() => handleRemoveAnime(anime?.mal_id)}
-               >
-                  <CancelIcon />
-               </IconButton> */}
             </Card>
          </Grid>
       )

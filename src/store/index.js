@@ -14,6 +14,7 @@ import {
    getSearchName,
    getStatus,
    loginUser,
+   searchPageFilter,
 } from './slices/formSlice'
 
 // REDUX QUERY
@@ -26,6 +27,10 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 //  animes
 import { animesApi } from './apis/animesApi'
+
+// const customizedMiddleware = getDefaultMiddleware({
+//    serializableCheck: false
+//  })
 
 const persistConfig = {
    key: 'anime',
@@ -46,7 +51,9 @@ const store = configureStore({
       [animesApi.reducerPath]: animesApi.reducer,
    },
    middleware: getDefaultMiddleware => {
-      return getDefaultMiddleware().concat(animesApi.middleware)
+      return getDefaultMiddleware({
+         serializableCheck: false,
+      }).concat(animesApi.middleware)
    },
 })
 setupListeners(store.dispatch)
@@ -62,4 +69,5 @@ export {
    getStatus,
    loginUser,
    editAnimeStatus,
+   searchPageFilter,
 }
